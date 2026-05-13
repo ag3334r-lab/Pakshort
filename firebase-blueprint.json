@@ -1,0 +1,78 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "username": { "type": "string" },
+        "email": { "type": "string" },
+        "bio": { "type": "string" },
+        "profilePic": { "type": "string" },
+        "followersCount": { "type": "number" },
+        "followingCount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "username", "email", "createdAt"]
+    },
+    "Video": {
+      "title": "Video",
+      "description": "Short video metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "caption": { "type": "string" },
+        "hashtags": { "type": "array", "items": { "type": "string" } },
+        "likesCount": { "type": "number" },
+        "commentsCount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["id", "userId", "videoUrl", "createdAt"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "User comment on a video",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "videoId": { "type": "string" },
+        "userId": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "likesCount": { "type": "number" }
+      },
+      "required": ["id", "videoId", "userId", "text", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/videos/{videoId}": {
+      "schema": "Video",
+      "description": "Uploaded videos"
+    },
+    "/videos/{videoId}/likes/{userId}": {
+      "schema": { "type": "object", "properties": { "createdAt": { "type": "string", "format": "date-time" } } },
+      "description": "Likes on a video"
+    },
+    "/videos/{videoId}/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Comments on a video"
+    },
+    "/users/{userId}/followers/{followerId}": {
+      "schema": { "type": "object", "properties": { "createdAt": { "type": "string", "format": "date-time" } } },
+      "description": "Followers of a user"
+    },
+    "/users/{userId}/following/{followingId}": {
+      "schema": { "type": "object", "properties": { "createdAt": { "type": "string", "format": "date-time" } } },
+      "description": "Accounts a user follows"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "VibeShorts",
+  "description": "A high-performance short-video social media platform with a vertical feed, AI recommendations, and real-time engagement features.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "Firebase Authentication",
+    "Firestore Database",
+    "Video Processing",
+    "AI Recommendations"
+  ]
+}
